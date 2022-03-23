@@ -13,6 +13,10 @@ export class Pokemon extends Fighter {
     super(name, weight, height, stats);    
   }
 
+  /**
+   * La habilidad especial de este universo consiste en que cada Pokémon gritará
+   * su nombre previo a atacar.
+   */
   public secretAbility(): void {
     console.log(this.phrase); 
   }

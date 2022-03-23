@@ -14,10 +14,19 @@ export class SuperSayajin extends Fighter {
     super(name, weight, height, stats);    
   }
 
+  /**
+   * Devuelve el booleano que comprueba si una Kamehameha ha sido realizada
+   * o no 
+   */
   public getGodMode(): boolean {
     return this.godMode;
   }
 
+  /**
+   * La habilidad secreta de los Super Sayan consiste en que al su vida reducirse 
+   * a cero, revive y inflinje un ataque que mata a cualquier contrincante, gracias 
+   * a las bolas de dragón
+   */
   public secretAbility(): void {
     this.stats.attack = 9999;
     this.stats.hp = 1;

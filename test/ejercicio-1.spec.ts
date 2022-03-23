@@ -44,11 +44,27 @@ describe('Pruebas de las clases del Ejercicio 1', () => {
   });
 
   it('SuperSayajin tiene en su poder la KameHameHa', () => {
-    expect(Vegeta.secretAbility).to.be.exist;
+    expect(Vegeta.secretAbility).to.exist;
   });
 
   it('SuperSayajin tiene un bool para decir si ha usado la KameHameHa', () => {
-    expect(Vegeta.getGodMode).to.be.exist;
+    expect(Vegeta.getGodMode()).to.eq(true);
+  });
+
+  // Pruebas métpdps de Fighter
+  it('Un luchador tiene el método getName', () => {
+    expect(Charizard.getName()).to.be.eq('Charizard');
+  });
+  it('Un luchador tiene el método getHeight', () => {
+    expect(Charizard.getHeight()).to.be.eq(1.7);
+  });
+  
+  it('Un luchador tiene el método getWeight', () => {
+    expect(Charizard.getWeight()).to.be.eq(90.5);
+  });
+  
+  it('Un luchador tiene el método getStats', () => {
+    expect(Charizard.getStats().hp).to.eq(78);
   });
 
   // Clase Combat
