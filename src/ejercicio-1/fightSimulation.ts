@@ -1,5 +1,5 @@
 import {Combat} from './combat';
-import {powerStats} from './figther';
+import {powerStats} from './fighter';
 import {Pokemon} from './pokemon';
 import {SuperSayajin} from './superSayajin';
 

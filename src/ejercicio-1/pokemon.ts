@@ -1,4 +1,4 @@
-import {Fighter, powerStats} from './figther';
+import {Fighter, powerStats} from './fighter';
 
 /**
  * Esta clase Pokémon representa a un Contendiente del universo

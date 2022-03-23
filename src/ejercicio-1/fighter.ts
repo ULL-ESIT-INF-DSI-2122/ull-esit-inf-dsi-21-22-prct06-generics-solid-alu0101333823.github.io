@@ -16,7 +16,7 @@ export type powerStats = {
 }
 
 /**
- * Clase Pokemon, almacena la información de los luchadores
+ * Clase Fighter, almacena la información de los luchadores
  */
 export abstract class Fighter {
   constructor(public name: string, public weight: number,

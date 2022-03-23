@@ -1,4 +1,4 @@
-import {Fighter, powerStats} from './figther';
+import {Fighter, powerStats} from './fighter';
 
 /**
  * Esta clase representa a los contendientes Super Sayan que podrán

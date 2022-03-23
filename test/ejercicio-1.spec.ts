@@ -1,7 +1,7 @@
 import 'mocha';
 import {expect} from 'chai';
 import {Pokemon} from '../src/ejercicio-1/pokemon'; 
-import {Fighter, powerStats} from '../src/ejercicio-1/figther'; 
+import {Fighter, powerStats} from '../src/ejercicio-1/fighter'; 
 import {SuperSayajin} from '../src/ejercicio-1/superSayajin';
 
 const charizardStats: powerStats = {

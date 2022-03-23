@@ -1,4 +1,4 @@
-import {Fighter} from './figther';
+import {Fighter} from './fighter';
 import {Pokemon} from './pokemon';
 import {SuperSayajin} from './superSayajin';
 
