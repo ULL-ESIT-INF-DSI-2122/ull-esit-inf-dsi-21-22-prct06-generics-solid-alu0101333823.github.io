@@ -3,7 +3,12 @@
     "src/ejercicio-1/superSayajin.ts",
     "src/ejercicio-1/pokemon.ts",
     "src/ejercicio-1/combat.ts",
-    "src/ejercicio-1/fighter.ts"
+    "src/ejercicio-1/fighter.ts",
+    "src/modificacion/collectable.ts",
+    "src/modificacion/NumericSearcheableCollection.ts",
+    "src/modificacion/searcheable.ts",
+    "src/modificacion/searcheableCollection.ts",
+    "src/modificacion/StringSearcheableCollection.ts"
   ],
   "out": "./docs"
 }
