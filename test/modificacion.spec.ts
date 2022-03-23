@@ -28,6 +28,10 @@ describe('Pruebas de la clase NumericSearcheableCollection', () => {
     expect(nCollection.search).to.be.exist;
   });
 
+  it('nCollection tiene el método getItem', () => {
+    expect(nCollection.getItem).to.be.exist;
+  });
+
   it('nCollection tiene el método getNumbersOfItems', () => {
     expect(nCollection.getNumbersOfItems).to.be.exist;
   });
@@ -52,6 +56,10 @@ describe('Pruebas de la clase StringSearcheableCollection', () => {
 
   it('sCollection tiene el método search', () => {
     expect(sCollection.search).to.be.exist;
+  });
+
+  it('sCollection tiene el método getItem', () => {
+    expect(sCollection.getItem).to.be.exist;
   });
 
   it('sCollection tiene el método getNumbersOfItems', () => {
