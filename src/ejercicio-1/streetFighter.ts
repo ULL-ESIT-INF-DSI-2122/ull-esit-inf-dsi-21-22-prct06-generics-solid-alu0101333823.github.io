@@ -5,7 +5,7 @@ import {Fighter, powerStats} from './fighter';
  * Street Fighter de la compañía Capcom. Su habilidad secreta será
  * realizar el famoso Hadōken y aumentar en 10 su daño.
  */
-export class StreetFighterCapcom extends Fighter{
+export class StreetFighterCapcom extends Fighter {
   constructor(public name: string, public weight: number,
     public height: number, 
     public stats:powerStats, public godMode: boolean = false) {

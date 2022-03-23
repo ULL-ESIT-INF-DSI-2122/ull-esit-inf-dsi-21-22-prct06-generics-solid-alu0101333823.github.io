@@ -5,6 +5,7 @@ import {Fighter, powerStats} from '../src/ejercicio-1/fighter';
 import {SuperSayajin} from '../src/ejercicio-1/superSayajin';
 import {Combat} from '../src/ejercicio-1/combat';
 import {StreetFighterCapcom} from '../src/ejercicio-1/streetFighter';
+import {Pokedex} from '../src/ejercicio-1/pokedex';
 
 const charizardStats: powerStats = {
   attack: 84,
@@ -56,6 +57,7 @@ const kenStats: powerStats = {
 const Ken = new StreetFighterCapcom('Ken', 80.2, 1.8, kenStats);
 const secondFight = new Combat(Ryu, Ken);
 const thirdFight = new Combat(Pikachu, Goku);
+const pokedex = new Pokedex();
 
 describe('Pruebas de las clases del Ejercicio 1', () => {
   // Pruebas Pokémon
@@ -88,7 +90,20 @@ describe('Pruebas de las clases del Ejercicio 1', () => {
     expect(Vegeta.getGodMode()).to.be.false;
   });
 
-  // Pruebas métpdps de Fighter
+  // Pruebas StreetFighter
+  it('StreetFighterCapcom es instancia de Fighter', () => {
+    expect(Ryu).to.be.instanceOf(Fighter);
+  });
+
+  it('StreetFighterCapcom es instancia de StreetFighterCapcom', () => {
+    expect(Ryu).to.be.instanceOf(StreetFighterCapcom);
+  });
+
+  it('StreetFighterCapcom tiene en su poder el Hadōken', () => {
+    expect(Ryu.secretAbility()).to.eql(undefined);
+  });
+
+  // Pruebas métodos de Fighter
   it('Un luchador tiene el método getName', () => {
     expect(Charizard.getName()).to.be.eq('Charizard');
   });
@@ -109,5 +124,20 @@ describe('Pruebas de las clases del Ejercicio 1', () => {
     expect(fight.start()).to.be.eql(undefined);
     expect(secondFight.start()).to.be.eql(undefined);
     expect(thirdFight.start()).to.be.eql(undefined);
+  });
+
+  // Pruebas Pokédex
+  it('Pokédex es instancia de Pokédex', () => {
+    expect(pokedex).to.be.instanceOf(Pokedex);
+  });
+  
+  it('Pokédex tiene un método que añade luchadores de varios universos', () => {
+    expect(pokedex.add).to.be.exist;
+    // expect(pokedex.add(Charizard)).to.be.eql('');
+    // expect(pokedex.add(Vegeta)).to.be.eql('');
+  });
+  
+  it('Pokédex puede eliminar luchadores de su base de datos', () => {
+    expect(pokedex.remove).to.be.exist;
   });
 });

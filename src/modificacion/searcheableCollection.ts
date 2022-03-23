@@ -1,5 +1,5 @@
-import {Collectable} from './collectable'
-import {Searcheable} from './searcheable'
+import {Collectable} from './collectable';
+import {Searcheable} from './searcheable';
 
 /**
  * Clase abstracta que junta las interfaces Searcheable y Collectable para

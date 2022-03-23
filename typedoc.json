@@ -8,7 +8,8 @@
     "src/modificacion/NumericSearcheableCollection.ts",
     "src/modificacion/searcheable.ts",
     "src/modificacion/searcheableCollection.ts",
-    "src/modificacion/StringSearcheableCollection.ts"
+    "src/modificacion/StringSearcheableCollection.ts",
+    "src/ejercicio-1/pokedex.ts"
   ],
   "out": "./docs"
 }

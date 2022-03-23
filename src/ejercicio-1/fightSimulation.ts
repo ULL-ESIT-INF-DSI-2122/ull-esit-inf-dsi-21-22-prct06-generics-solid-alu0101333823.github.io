@@ -1,14 +1,14 @@
 import {Combat} from './combat';
 import {powerStats} from './fighter';
 import {Pokemon} from './pokemon';
-import { StreetFighterCapcom } from './streetFighter';
+import {StreetFighterCapcom} from './streetFighter';
 import {SuperSayajin} from './superSayajin';
 
 /**
  * Simulación de dos combates entre Universos y el mismo Universo
  */
 
-console.log('Primer Combate: ')
+console.log('Primer Combate: ');
 const pikachuStats: powerStats = {
   attack: 84,
   defense: 78,
@@ -27,7 +27,7 @@ const Goku = new SuperSayajin('Goku', 74.2, 1.5, gokuStats);
 const fight = new Combat(Goku, Pikachu);
 fight.start();
 
-console.log('Segundo Combate: ')
+console.log('Segundo Combate: ');
 
 const ryuStats: powerStats = {
   attack: 40,
