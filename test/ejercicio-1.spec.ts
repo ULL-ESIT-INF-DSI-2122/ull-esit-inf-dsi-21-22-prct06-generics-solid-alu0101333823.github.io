@@ -3,6 +3,8 @@ import {expect} from 'chai';
 import {Pokemon} from '../src/ejercicio-1/pokemon'; 
 import {Fighter, powerStats} from '../src/ejercicio-1/fighter'; 
 import {SuperSayajin} from '../src/ejercicio-1/superSayajin';
+import {Combat} from '../src/ejercicio-1/combat';
+import {StreetFighterCapcom} from '../src/ejercicio-1/streetFighter';
 
 const charizardStats: powerStats = {
   attack: 84,
@@ -19,6 +21,41 @@ const vegetaStats: powerStats = {
   hp: 50,
 };
 const Vegeta = new SuperSayajin('Vegeta', 74.2, 1.5, vegetaStats);
+
+const pikachuStats: powerStats = {
+  attack: 84,
+  defense: 78,
+  speed: 100,
+  hp: 78,
+};
+const Pikachu = new Pokemon('Pikachu', 90.5, 1.7, 'fuego', pikachuStats, 'pika pika PIKACHU');
+
+const gokuStats: powerStats = {
+  attack: 40,
+  defense: 2,
+  speed: 1000000,
+  hp: 50,
+};
+const Goku = new SuperSayajin('Goku', 74.2, 1.5, gokuStats);
+const fight = new Combat(Goku, Pikachu);
+
+const ryuStats: powerStats = {
+  attack: 40,
+  defense: 30,
+  speed: 100,
+  hp: 100,
+};
+const Ryu = new StreetFighterCapcom('Ryu', 83.0, 1.78, ryuStats);
+
+const kenStats: powerStats = {
+  attack: 40,
+  defense: 30,
+  speed: 100,
+  hp: 100,
+};
+const Ken = new StreetFighterCapcom('Ken', 80.2, 1.8, kenStats);
+const secondFight = new Combat(Ryu, Ken);
+const thirdFight = new Combat(Pikachu, Goku);
 
 describe('Pruebas de las clases del Ejercicio 1', () => {
   // Pruebas Pokémon
@@ -48,7 +85,7 @@ describe('Pruebas de las clases del Ejercicio 1', () => {
   });
 
   it('SuperSayajin tiene un bool para decir si ha usado la KameHameHa', () => {
-    expect(Vegeta.getGodMode()).to.eq(true);
+    expect(Vegeta.getGodMode()).to.be.false;
   });
 
   // Pruebas métpdps de Fighter
@@ -68,4 +105,9 @@ describe('Pruebas de las clases del Ejercicio 1', () => {
   });
 
   // Clase Combat
+  it('Un combate tiene el método de comenzar un combate', () => {
+    expect(fight.start()).to.be.eql(undefined);
+    expect(secondFight.start()).to.be.eql(undefined);
+    expect(thirdFight.start()).to.be.eql(undefined);
+  });
 });
