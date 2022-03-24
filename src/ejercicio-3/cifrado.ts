@@ -1,30 +1,56 @@
 
+/**
+ * Clase estándar que permitirá cifrar un mensaje mediante el Cifrado de 
+ * César.
+ * @param desplazamiento el número de desplazamientos para cifrar
+ * @param alphabet alfabeto que se usará para cifrar
+ */
 export class Cifrado {
   constructor(private desplazamiento: number, private alphabet: string) {
   }
 
+  /**
+   * Cifra un mensaje usando el alfabeto y desplazamiento indicado en el 
+   * constructor
+   * @param msg mensaje a cifrar
+   * @returns el mensaje cifrado
+   */
   cifrar(msg: string): string {
-    let result: string = '';
-    
+    let result: string = '';    
     for (let i = 0; i < msg.length; i++) {
-      // La letra a ascii de nuestro alfabeto (a = 0, b = 1, etc)
-      let aux = this.alphabet.indexOf(msg[i]);
-      console.log(aux);
-      // Ese índice de nuestro alfableto ahora será igual a index % alphabet length
-      aux = (aux + this.desplazamiento) % this.alphabet.length;
-      // Ese índice ahora resultado a letra otra vez
-      result += this.alphabet[aux];
-    }
-    
+      if (this.alphabet.indexOf(msg[i]) !== -1) {
+        let aux = this.alphabet.indexOf(msg[i]);
+        aux = (aux + this.desplazamiento) % this.alphabet.length;
+        result += this.alphabet[aux];
+      } else {
+        result += msg[i];
+      }
+    }    
     return result;
   }
 
+  /**
+   * Descifra un mensaje usando el alfabeto y desplazamiento indicado en el 
+   * constructor
+   * @param msg mensaje a descifrar
+   * @returns el mensaje descifrado
+   */
   descifrar(msg: string): string {
-    const result: string = '';
-
+    let result: string = '';
+    for (let i = 0; i < msg.length; i++) {
+      if (this.alphabet.indexOf(msg[i]) !== -1) {
+        let aux = this.alphabet.indexOf(msg[i]);
+        aux = (aux - this.desplazamiento) % this.alphabet.length;
+        result += this.alphabet[aux];
+      } else {
+        result += msg[i];
+      }
+    } 
     return result;
   }
 }
 
-const cifrado = new Cifrado(5, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ');
-console.log(`Ciframos hola: ${cifrado.cifrar('ABC')}`);
+const cifrado = new Cifrado(5, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz');
+const firstMsg = cifrado.cifrar('Hola, como estas');
+console.log(`Ciframos 'Hola, como estas': ${firstMsg}`);
+console.log(`Desciframos '${firstMsg}': ${cifrado.descifrar(firstMsg)}`);

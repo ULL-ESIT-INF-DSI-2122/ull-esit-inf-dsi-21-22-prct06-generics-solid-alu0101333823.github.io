@@ -722,3 +722,87 @@ Para terminar con este segundo ejercicio, las pruebas llevadas a cabo para el co
     });
   });
 ```
+
+### Ejercicio 3
+En este último ejercicio se implementará una clase que nos permitirá cifrar mensajes que le pasemos como parámetros a sus métodos. El constructor de la clase debe ser quien guarde el _alfabeto_ que vamos a usar y el _desplazamiento_ que se usará. La clave en este ejercicio nos la indicaron en la asignatura de _Seguridad en Sistemas Informáticos_. El mayor desafío consistirá en que los desplazamientos que causen un desborde (es decir la letra Y si la desplazamos a la derecha 3 posiciones se sale del orden del alfabeto español ¿no?). Para estos casos usaremos la operación **módulo**. Esto permitirá que las letras que causen un desbordamiento se desplacen de manera correcta. 
+
+Por ejemplo, la z es 26 (en el alfabeto inglés, supongamos que la ñ no existe). Si la desplazamos dos veces, obtenemos 28, número que no corresponde a nada en el alfabeto. Pero si sacamos el módulo de la suma al ser dividida entre 26, obtenemos esto:
+
+  * `28 % 26 = 2`
+
+Cualquier carácter que no pertenezca al alfabeto que la clase tiene registrado será ignorado totalmente. Por ejemplo comas y espacios. He realizado un ejemplo, cuyo alfabeto es el siguiente: `ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz`. El resultado es el siguiente:
+
+  ![](/assets/output2.png)
+  > Resultado de un cifrado
+
+Como se puede observar, los espacios y la coma son absolutamente respetados. En caso de introducir un espacio o la coma en el alfabeto, serían desplazados también. He aquí el algoritmo:ç
+
+```ts
+  export class Cifrado {
+    constructor(private desplazamiento: number, private alphabet: string) {
+    }
+
+    /**
+     * Cifra un mensaje usando el alfabeto y desplazamiento indicado en el 
+     * constructor
+     * @param msg mensaje a cifrar
+     * @returns el mensaje cifrado
+     */
+    cifrar(msg: string): string {
+      let result: string = '';    
+      for (let i = 0; i < msg.length; i++) {
+        if (this.alphabet.indexOf(msg[i]) !== -1) {
+          let aux = this.alphabet.indexOf(msg[i]);
+          aux = (aux + this.desplazamiento) % this.alphabet.length;
+          result += this.alphabet[aux];
+        } else {
+          result += msg[i];
+        }
+      }    
+      return result;
+    }
+
+    /**
+     * Descifra un mensaje usando el alfabeto y desplazamiento indicado en el 
+     * constructor
+     * @param msg mensaje a descifrar
+     * @returns el mensaje descifrado
+     */
+    descifrar(msg: string): string {
+      let result: string = '';
+      for (let i = 0; i < msg.length; i++) {
+        if (this.alphabet.indexOf(msg[i]) !== -1) {
+          let aux = this.alphabet.indexOf(msg[i]);
+          aux = (aux - this.desplazamiento) % this.alphabet.length;
+          result += this.alphabet[aux];
+        } else {
+          result += msg[i];
+        }
+      } 
+      return result;
+    }
+  }
+```
+
+Se emplea un auxiliar para recalcular el índice a usar en el alfabeto, ese nuevo índice indicará la letra de sustitución para el cifrado. Por último, estas son las pruebas llevadas a cabo: 
+
+```ts
+  const cifrado = new Cifrado(5, 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz');
+  const firstMsg = cifrado.cifrar('Hola, como estas');
+
+  describe('Pruebas del ejercicio 3', () => {
+    describe('Pruebas clase Cifrado', () => {
+      it('Cifrado es instancia de Cifrado', () => {
+        expect(cifrado).to.be.instanceOf(Cifrado);
+      });
+
+      it('Cifrado tiene un método para cifrar', () => {
+        expect(cifrado.cifrar('Hola, como estas')).to.be.eq(firstMsg);
+      });
+
+      it('Cifrado tiene un método para descifrar', () => {
+        expect(cifrado.descifrar(firstMsg)).to.be.eq('Hola, como estas');
+      });
+    });   
+  });
+```

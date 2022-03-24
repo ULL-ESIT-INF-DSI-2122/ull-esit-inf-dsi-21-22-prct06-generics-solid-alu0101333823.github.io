@@ -14,7 +14,8 @@
     "src/ejercicio-2/stremeable.ts",
     "src/ejercicio-2/series.ts",
     "src/ejercicio-2/movies.ts",
-    "src/ejercicio-2/documentary.ts"
+    "src/ejercicio-2/documentary.ts",
+    "src/ejercicio-3/cifrado.ts"
   ],
   "out": "./docs"
 }

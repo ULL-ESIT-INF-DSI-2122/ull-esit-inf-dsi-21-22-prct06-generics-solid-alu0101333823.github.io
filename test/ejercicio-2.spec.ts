@@ -1,6 +1,5 @@
 import 'mocha';
 import {expect} from 'chai';
-// import {BasicStremeableCollection} from '../src/ejercicio-2/basicStremeableCollection';
 import {Serie, SeriesCollection} from '../src/ejercicio-2/series';
 import {BasicStremeableCollection} from '../src/ejercicio-2/basicStremeableCollection';
 import {Movie, MoviesCollection} from '../src/ejercicio-2/movies';
