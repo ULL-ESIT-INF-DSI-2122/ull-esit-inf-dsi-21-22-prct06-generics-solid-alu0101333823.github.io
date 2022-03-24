@@ -9,7 +9,12 @@
     "src/modificacion/searcheable.ts",
     "src/modificacion/searcheableCollection.ts",
     "src/modificacion/StringSearcheableCollection.ts",
-    "src/ejercicio-1/pokedex.ts"
+    "src/ejercicio-1/pokedex.ts",
+    "src/ejercicio-2/basicStremeableCollection.ts",
+    "src/ejercicio-2/stremeable.ts",
+    "src/ejercicio-2/series.ts",
+    "src/ejercicio-2/movies.ts",
+    "src/ejercicio-2/documentary.ts"
   ],
   "out": "./docs"
 }

@@ -133,8 +133,6 @@ describe('Pruebas de las clases del Ejercicio 1', () => {
   
   it('Pokédex tiene un método que añade luchadores de varios universos', () => {
     expect(pokedex.add).to.be.exist;
-    // expect(pokedex.add(Charizard)).to.be.eql('');
-    // expect(pokedex.add(Vegeta)).to.be.eql('');
   });
   
   it('Pokédex puede eliminar luchadores de su base de datos', () => {

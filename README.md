@@ -419,3 +419,306 @@ Pruebas implementadas
     expect(pokedex.remove).to.be.exist;
   });
 ```
+
+### Ejercicio 2
+Para crear nuestra plataforma de _Streaming_, crearemos una interfaz genérica `Stremeable` con la que sentar unas bases para el resto de clases a crear: 
+
+```ts
+  /**
+   * Esta interfaz será la responsable de ser implementada en todas las clases
+   * para crear DSIflix. Deberá poder añadir items, así como eliminarlos, y podrá
+   * obtenerse una peli, serie o documental por nombre. Podrá devolverse el 
+   * número de contenido digital total.
+   */
+  export interface Stremeable<T> {
+    /**
+     * @param item item a añadir
+     */
+    addItem(item: T): void;
+    
+    /**
+     * @param name nombre del item a devolver
+     * @returns item 
+     * @returns undefined en caso de no encontrarse 
+     */
+    getItemByName(name: string): T | undefined;
+
+    /**
+     * Dado un item lo elimina de la lista
+     * @param name nombre del item a eliminar
+     */
+    removeItemByName(name: string): void;
+
+    /**
+     * Devuelve el número de items totales
+     */
+    getAllItems(): number;
+  } 
+```
+
+Con esta interfaz, crearemos la clase abstracta genérica que nos permitirá crear las pautas necesarias para definir las colecciones de `Series`, `Películas` y `Documentales`. Esta clase se llamará `BasicStremeableCollection`. He particularizado dos de los métodos, uno que te devuelve el número de _items_ que tiene la colección y otro que añade un _item_ a dicha base de datos: 
+
+```ts
+  /**
+   * Esta clase abstracta genérica es la base para desarrollar
+   * las diferentes colecciones en la plataforma.
+   */
+  export abstract class BasicStremeableCollection<T> implements Stremeable<T> {
+    protected items: T[] = [];
+    constructor() {
+    }
+    
+    /** 
+     * @param item item a añadir
+     */
+    addItem(item: T): void {
+      this.items.push(item);
+    }
+    
+    /**
+     * Devuelve el número de items totales
+     */
+    getAllItems(): number {
+      return this.items.length;
+    }
+
+    /**
+     * Dado un item lo elimina de la lista
+     * @param name nombre del item a eliminar
+     */
+    abstract removeItemByName(name: string): void;
+
+    /**
+     * @param name nombre del item a devolver
+     * @returns item 
+     * @returns undefined en caso de no encontrarse 
+     */
+    abstract getItemByName(name: string): T | undefined;
+  }
+``` 
+
+Ahora bien, creamos los tres tipos de colecciones, pero no sin antes crear las clases `Serie`, `Movie` y `Documentary`, que serán el tipo de sus respectivas colecciones. Estas clases solo guardan sus características como su nombre, número de capítulos o duración:
+
+```ts
+  export class Serie {
+    /**
+     * @param name nombre de la serie
+     * @param duration duración medio de cada capítulo
+     * @param chapterNum número total de capítulos
+     */
+    constructor(public name: string, public duration: number, public chapterNum: number) {
+    }
+  }
+
+  export class Movie {
+    /**
+     * @param name nombre de la película
+     * @param duration duración en minutos de la misma
+     */
+    constructor(public name: string, public duration: number) {
+    }
+  }
+
+  export class Documentary {
+    /**
+     * @param name nombre del documental
+     * @param duration duración en minutos del mismo
+     */
+    constructor(public name: string, public duration: number) {
+    }
+  }
+```
+
+Por último, creamos las 3 últimas colecciones con las que podremos particularizar los dos métodos que nos restan definidos en `Stremeable`. Dichas colecciones serán `SeriesCollection`, `MoviesCollection` y `DocumentaryCollection`:
+
+```ts
+  /**
+   * Clase que guarda una colección de Series
+   */
+  export class SeriesCollection extends BasicStremeableCollection<Serie> {
+    constructor() {
+      super();
+    }
+
+    /**
+     * Elimina una serie de la base de datos
+     * @param name nombre de la serie
+     */
+    removeItemByName(name: string): void {
+      this.items.forEach((element, index) => {
+        if (element.name === name) {
+          this.items = this.items.splice(index, 1);
+        }
+      });
+    }
+    
+    /**
+     * Busca y devuelve una serie de la base de datos por
+     * su nombre
+     * @param name 
+     * @returns 
+     */
+    getItemByName(name: string): Serie | undefined {
+      this.items.forEach((element) => {
+        if (element.name === name) {
+          return element;
+        }
+      });
+      return undefined;
+    }
+  }
+
+  export class MoviesCollection extends BasicStremeableCollection<Movie> {
+    constructor() {
+      super();
+    }
+
+    /**
+     * Elimina una Movie de la base de datos
+     * @param name nombre de la Movie
+     */
+    removeItemByName(name: string): void {
+      this.items.forEach((element, index) => {
+        if (element.name === name) {
+          this.items = this.items.splice(index, 1);
+        }
+      });
+    }
+    
+    /**
+     * Busca y devuelve una Movie de la base de datos por
+     * su nombre
+     * @param name 
+     * @returns 
+     */
+    getItemByName(name: string): Movie | undefined {
+      this.items.forEach((element) => {
+        if (element.name === name) {
+          return element;
+        }
+      });
+      return undefined;
+    }
+  }
+
+  export class DocumentaryCollection extends BasicStremeableCollection<Documentary> {
+    /**
+     * @param name nombre del documental
+     * @param duration duración en minutos del mismo
+     */
+    constructor() {
+      super();
+    }
+
+    /**
+     * Elimina una Documentary de la base de datos
+     * @param name nombre de la Documentary
+     */
+    removeItemByName(name: string): void {
+      this.items.forEach((element, index) => {
+        if (element.name === name) {
+          this.items = this.items.splice(index, 1);
+        }
+      });
+    }
+    
+    /**
+     * Busca y devuelve una Documentary de la base de datos por
+     * su nombre
+     * @param name 
+     * @returns 
+     */
+    getItemByName(name: string): Documentary | undefined {
+      this.items.forEach((element) => {
+        if (element.name === name) {
+          return element;
+        }
+      });
+      return undefined;
+    }
+  }
+```
+
+Para terminar con este segundo ejercicio, las pruebas llevadas a cabo para el correcto _testeo_ de estas clases mecionadas anteriormente:
+
+```ts
+  const serie1 = new Serie('Lost', 50, 120);
+  const movie1 = new Movie('1917', 117);
+  const documentary1 = new Documentary('WWII a color', 800);
+  const series = new SeriesCollection();
+  const movies = new MoviesCollection();
+  const documentaries = new DocumentaryCollection();
+
+  describe('Pruebas de las clases del Ejercicio 2', () => {
+    describe('Pruebas de la clase BasicStremeableCollection', () => {
+      it('Puede añadir items', () => {
+        expect(series.addItem(serie1)).to.be.eql(undefined);
+        expect(movies.addItem(movie1)).to.be.eql(undefined);
+        expect(documentaries.addItem(documentary1)).to.eql(undefined);
+      });
+
+      it('Puede decirnos cuantos items tiene guardados', () => {
+        expect(series.getAllItems()).to.be.eq(1);
+        expect(movies.getAllItems()).to.be.eq(1);
+        expect(documentaries.getAllItems()).to.eq(1);
+      });
+    });
+
+    describe('Pruebas de la clase Serie', () => {
+      it('Series es instancia de BasicStremeableCollection', () => {
+        expect(series).to.be.instanceOf(BasicStremeableCollection);
+      });
+
+      it('Series es instancia de SeriesCollection', () => {
+        expect(series).to.be.instanceOf(SeriesCollection);
+      });
+
+      it('Series tiene un método para buscar por nombre una serie', () => {
+        expect(series.getItemByName('Lost')).to.not.eql(serie1);
+        expect(series.getItemByName('Castle')).to.be.eql(undefined);
+      });
+
+      it('Series tiene un método para eliminar por nombre una serie', () => {
+        expect(series.removeItemByName('Lost')).to.be.eql(undefined);
+      });
+    });
+
+    describe('Pruebas de la clase MovieCollection', () => {
+      it('MoviesCollection es instancia de BasicStremeableCollection', () => {
+        expect(movies).to.be.instanceOf(BasicStremeableCollection);
+      });
+
+      it('MoviesCollection es instancia de MoviesCollection', () => {
+        expect(movies).to.be.instanceOf(MoviesCollection);
+      });
+
+      it('MoviesCollection tiene un método para buscar por nombre una película', () => {
+        expect(movies.getItemByName('1917')).to.not.eql(movie1);
+        expect(movies.getItemByName('El padrino')).to.be.eql(undefined);
+      });
+
+      it('MoMoviesCollectionvie tiene un método para eliminar por nombre una película', () => {
+        expect(movies.removeItemByName('1917')).to.be.eql(undefined);
+      });
+    });
+
+    describe('Pruebas de la clase DocumentaryCollection', () => {
+      it('DocumentaryCollection es instancia de BasicStremeableCollection', () => {
+        expect(documentaries).to.be.instanceOf(BasicStremeableCollection);
+      });
+
+      it('DocumentaryCollection es instancia de DocumentaryCollection', () => {
+        expect(documentaries).to.be.instanceOf(DocumentaryCollection);
+      });
+
+      it('DocumentaryCollection tiene un método para buscar por nombre un documental', () => {
+        expect(documentaries.getItemByName('WWII a color')).to.not.eql(documentary1);
+        expect(documentaries.getItemByName('El espacio')).to.be.eql(undefined);
+      });
+
+      it('DocumentaryCollection tiene un método para eliminar por nombre un documental', () => {
+        expect(documentaries.removeItemByName('WWII a color')).to.be.eql(undefined);
+      });
+    });
+  });
+```
